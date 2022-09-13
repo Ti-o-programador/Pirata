@@ -13,11 +13,11 @@ class Cannon
     show()
     {
         push();
-        rectMode(CENTER);
-        rect(this.x, this.y, this.larg, this.alt);
+        imageMode(CENTER);
+        image(cannonImg,this.x, this.y, this.larg, this.alt);
         pop();
 
-        rect(70,20,200,200);
+        image(cannonBaseImg,70,20,200,210);
         noFill();
 
     }

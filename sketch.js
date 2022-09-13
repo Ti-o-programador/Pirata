@@ -8,12 +8,14 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine, world, ground;
-var backgroundImg, towerImg, canonImg, canonBaseImg;
+var backgroundImg, towerImg, cannonImg, cannonBaseImg;
 var tower, cannon;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
   towerImg = loadImage("./assets/tower.png");
+  cannonImg = loadImage("./assets/canon.png");
+  cannonBaseImg = loadImage("./assets/cannonBase.png");
 }
 
 function setup() {
