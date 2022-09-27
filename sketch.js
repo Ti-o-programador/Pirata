@@ -7,19 +7,23 @@ const Bodies = Matter.Bodies;
 // restricao
 const Constraint = Matter.Constraint;
 
+const Body = Matter.Body
+
 var engine, world, ground;
 var backgroundImg, towerImg, cannonImg, cannonBaseImg;
 var tower, cannon, cannonBall;
 var angle = 15;
 
-function preload() {
+function preload() 
+{
   backgroundImg = loadImage("./assets/background.gif");
   towerImg = loadImage("./assets/tower.png");
   cannonImg = loadImage("./assets/canon.png");
   cannonBaseImg = loadImage("./assets/cannonBase.png");
 }
 
-function setup() {
+function setup() 
+{
   canvas = createCanvas(1200, 600);
   engine = Engine.create();
   world = engine.world;
@@ -41,7 +45,8 @@ function setup() {
  
 }
 
-function draw() {
+function draw() 
+{
   image(backgroundImg, 0, 0, 1200, 600);
   Engine.update(engine);
 
@@ -55,4 +60,11 @@ function draw() {
   cannon.show();
   cannonBall.display();
 
+}
+
+function keyReleased()
+{
+  if(keyCode === DOWN_ARROW){
+    cannonBall.shoot();
+  }
 }

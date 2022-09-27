@@ -15,4 +15,18 @@ class CannonBall {
         image(this.image, pos.x, pos.y, this.radius, this.radius);
         pop(); // volta a configuracao anterior
     }
+
+    shoot()
+    {
+        var newAngle = cannon.angulo - 28;
+        newAngle = newAngle * (3.14/180);
+        var velocity = p5.Vector.fromAngle(newAngle);
+        velocity.mult(0.5)
+        Body.setStatic(this.body,false);
+        Body.setVelocity(this.body,{
+            x:velocity.x*(180/3.14),
+            y:velocity.y*(180/3.14)
+        });
+    
+    }
 }
