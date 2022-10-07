@@ -13,6 +13,7 @@ var engine, world, ground;
 var backgroundImg, towerImg, cannonImg, cannonBaseImg;
 var tower, cannon, cannonBall;
 var angle = 15;
+var balls=[];
 
 function preload() 
 {
@@ -58,13 +59,33 @@ function draw()
   pop(); // volta a configuracao anterior
   
   cannon.show();
-  cannonBall.display();
+  //cannonBall.display();
+
+  for (let i = 0; i < balls.length; i++) {
+    showCannonBalls(balls[i],i)
+  }
 
 }
 
 function keyReleased()
 {
   if(keyCode === DOWN_ARROW){
-    cannonBall.shoot();
+    balls[balls.length-1].shoot();
   }
 }
+
+function keyPressed()
+{
+  if(keyCode === DOWN_ARROW){
+    var cannonBall = new CannonBall(cannon.x, cannon.y);
+    balls.push(cannonBall);
+  }
+}
+
+function showCannonBalls(ball,i)
+{
+  if(ball){
+    ball.display();
+  }
+}
+
