@@ -6,12 +6,12 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 // restricao
 const Constraint = Matter.Constraint;
-
-const Body = Matter.Body
+// manipula os objetos
+const Body = Matter.Body;
 
 var engine, world, ground;
 var backgroundImg, towerImg, cannonImg, cannonBaseImg;
-var tower, cannon, cannonBall;
+var tower, cannon, cannonBall, boat, boats = [];
 var angle = 15;
 var balls=[];
 
@@ -44,6 +44,7 @@ function setup()
   cannon = new Cannon(180,110,130,100,angle);
   cannonBall = new CannonBall(cannon.x, cannon.y);
  
+  boat = new Boat(width-79, height-60, 170, 170, -80);
 }
 
 function draw() 
@@ -59,12 +60,17 @@ function draw()
   pop(); // volta a configuracao anterior
   
   cannon.show();
-  //cannonBall.display();
 
   for (let i = 0; i < balls.length; i++) {
     showCannonBalls(balls[i],i)
   }
 
+  Body.setVelocity(boat.body, {
+    x: -0.9,
+    y: 0
+  });
+
+  boat.show();
 }
 
 function keyReleased()
@@ -88,4 +94,3 @@ function showCannonBalls(ball,i)
     ball.display();
   }
 }
-
