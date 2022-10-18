@@ -42,7 +42,6 @@ function setup() {
   cannon = new Cannon(180, 110, 130, 100, angle);
   cannonBall = new CannonBall(cannon.x, cannon.y);
 
-  boat = new Boat(width - 79, height - 60, 170, 170, -80);
 }
 
 function draw() {
@@ -62,12 +61,7 @@ function draw() {
     showCannonBalls(balls[i], i)
   }
 
-  Body.setVelocity(boat.body, {
-    x: -0.9,
-    y: 0
-  });
-
-  boat.show();
+  showBoats();
 }
 
 function keyReleased() {
@@ -92,6 +86,14 @@ function showCannonBalls(ball, i) {
 function showBoats() {
 
   if (boats.length > 0) {
+    if (boats[boats.length -1].body.position.x < width -300
+      || boats[boats.length -1] === undefined
+      ) {
+      var positions = [-40,-60,-70,-20];
+      var position = random(positions);
+      var boat = new Boat(width, height - 100, 170, 170, position);
+      boats.push(boat);
+    }
     for (let i = 0; i < boats.length; i++) {
       if (boats[i]) {
         Body.setVelocity(boats[i].body, {
