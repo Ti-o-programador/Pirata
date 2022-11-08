@@ -41,7 +41,6 @@ function setup() {
 
   cannon = new Cannon(180, 110, 130, 100, angle);
   cannonBall = new CannonBall(cannon.x, cannon.y);
-
 }
 
 function draw() {
@@ -59,6 +58,7 @@ function draw() {
 
   for (let i = 0; i < balls.length; i++) {
     showCannonBalls(balls[i], i)
+    colisionWithBoat(i);
   }
 
   showBoats();
@@ -112,3 +112,13 @@ function showBoats() {
 
 }
 
+function colisionWithBoat(ballIndex) {
+  for (var i = 0; i < boats.length; i++) {
+    if (balls[ballIndex] !== undefined && boats[i] !== undefined) {
+      var collision = Matter.SAT.collides(balls[ballIndex].body, boats[i].body);
+      if (collision.collided) {
+        console.log(collision);
+      }
+    }
+  }
+}

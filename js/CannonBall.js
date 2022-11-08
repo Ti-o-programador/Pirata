@@ -27,6 +27,10 @@ class CannonBall {
             x:velocity.x*(180/3.14),
             y:velocity.y*(180/3.14)
         });
-    
+    }
+
+    remove(index)
+    {
+
     }
 }
