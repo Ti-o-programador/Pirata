@@ -80,16 +80,23 @@ function keyPressed() {
 function showCannonBalls(ball, i) {
   if (ball) {
     ball.display();
+    if (ball.body.position.y >= height - 50) {
+      ball.remove(i);
+    } else if (ball.body.position.x >= width) {
+      World.remove(world, ball.body);
+      delete balls[i];
+    } 
+        
   }
 }
 
 function showBoats() {
 
   if (boats.length > 0) {
-    if (boats[boats.length -1].body.position.x < width -300
-      || boats[boats.length -1] === undefined
-      ) {
-      var positions = [-40,-60,-70,-20];
+    if (boats[boats.length - 1].body.position.x < width - 300
+      || boats[boats.length - 1] === undefined
+    ) {
+      var positions = [-40, -60, -70, -20];
       var position = random(positions);
       var boat = new Boat(width, height - 100, 170, 170, position);
       boats.push(boat);
@@ -117,7 +124,9 @@ function colisionWithBoat(ballIndex) {
     if (balls[ballIndex] !== undefined && boats[i] !== undefined) {
       var collision = Matter.SAT.collides(balls[ballIndex].body, boats[i].body);
       if (collision.collided) {
-        console.log(collision);
+        boats[i].remove(i);
+        World.remove(world, balls[ballIndex].body);
+        delete balls[ballIndex];
       }
     }
   }

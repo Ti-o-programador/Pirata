@@ -29,8 +29,12 @@ class CannonBall {
         });
     }
 
-    remove(index)
-    {
+    remove(ballIndex) {
+        Body.setVelocity(this.body, {x:0, y:0});
+        setTimeout(() => {
+            World.remove(world, this.body);
+            delete balls[ballIndex];
+        }, 1000);
 
     }
 }
