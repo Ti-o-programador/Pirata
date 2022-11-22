@@ -13,6 +13,7 @@ var engine, world, ground;
 var backgroundImg, towerImg, cannonImg, cannonBaseImg;
 var tower, cannon, cannonBall, boat, boats = [];
 var boatJson, boatImg, boatAnimation = [];
+var brokenBoatJson, brokenBoatImg, brokenBoatAnimation = [];
 var angle = 15;
 var balls = [];
 
@@ -24,6 +25,8 @@ function preload() {
 
   boatJson = loadJSON("./assets/boat/boat.json");
   boatImg = loadImage("./assets/boat/boat.png");
+  brokenBoatJson = loadJSON("./assets/boat/brokenBoat.json");
+  brokenBoatImg = loadImage("./assets/boat/brokenBoat.png");
 }
 
 function setup() {
@@ -51,6 +54,13 @@ function setup() {
     var pos = boatFrames[i].position;
     var img = boatImg.get(pos.x, pos.y, pos.w, pos.h);
     boatAnimation.push(img);
+  }
+
+  var brokenBoatFrames = brokenBoatJson.frames;
+  for(var i = 0; i < brokenBoatFrames.length; i++) {
+    var pos = brokenBoatFrames[i].position;
+    var img = brokenBoatImg.get(pos.x, pos.y, pos.w, pos.h);
+    brokenBoatAnimation.push(img);
   }
 }
 

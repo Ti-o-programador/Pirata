@@ -10,6 +10,7 @@ class Boat {
         this.boatPosition = boatPos;
         this.boatAnimation = boatAnimation;
         this.speed = 0.05;
+        this.isBroken = false;
     }
 
     animate()
@@ -32,6 +33,10 @@ class Boat {
     }
 
     remove(boatIndex) {
+        this.boatAnimation = brokenBoatAnimation;
+        this.speed = 0.05;
+        this.width = this.height = 300;
+        this.isBroken = true;
         setTimeout(() => {
             World.remove(world, this.body);
             delete boats[boatIndex];
