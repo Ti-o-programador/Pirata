@@ -23,7 +23,7 @@ class CannonBall {
         var velocity = p5.Vector.fromAngle(newAngle);
         velocity.mult(0.5)
         Body.setStatic(this.body,false);
-        Body.setVelocity(this.body,{
+        Body.setVelocity(this.body, {
             x:velocity.x*(180/3.14),
             y:velocity.y*(180/3.14)
         });
