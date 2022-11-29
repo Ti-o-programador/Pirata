@@ -14,6 +14,7 @@ var backgroundImg, towerImg, cannonImg, cannonBaseImg;
 var tower, cannon, cannonBall, boat, boats = [];
 var boatJson, boatImg, boatAnimation = [];
 var brokenBoatJson, brokenBoatImg, brokenBoatAnimation = [];
+var splashJson, splashImg, splashAnimation = [];
 var angle = 15;
 var balls = [];
 
@@ -27,6 +28,8 @@ function preload() {
   boatImg = loadImage("./assets/boat/boat.png");
   brokenBoatJson = loadJSON("./assets/boat/brokenBoat.json");
   brokenBoatImg = loadImage("./assets/boat/brokenBoat.png");
+  splashJson = loadJSON("./assets/waterSplash/waterSplash.json");
+  splashImg = loadImage("./assets/waterSplash/waterSplash.png");
 }
 
 function setup() {
@@ -62,7 +65,23 @@ function setup() {
     var img = brokenBoatImg.get(pos.x, pos.y, pos.w, pos.h);
     brokenBoatAnimation.push(img);
   }
+
+  var splashFrames = splashJson.frames;
+  for(var i = 0; i < splashFrames.length; i++) {
+    var pos = splashFrames[i].position;
+    var img = splashImg.get(pos.x, pos.y, pos.w, pos.h);
+    splashAnimation.push(img);
+  }
 }
+
+// function animation(json, image, animation) {
+//   var frames = json.frames;
+//   for (var i = 0; i < frames.length; i++) {
+//     var pos = frames[i].position;
+//     var img = image.get(pos.x, pos.y, pos.w, pos.h);
+//     animation.push(img);
+//   }
+// }
 
 function draw() {
   image(backgroundImg, 0, 0, 1200, 600);
@@ -114,8 +133,8 @@ function showCannonBalls(ball, i) {
 function showBoats() {
 
   if (boats.length > 0) {
-    if (boats[boats.length - 1].body.position.x < width - 300
-      || boats[boats.length - 1] === undefined
+    if (boats[boats.length - 1] === undefined
+      || boats[boats.length - 1].body.position.x < width - 300
     ) {
       var positions = [-40, -60, -70, -20];
       var position = random(positions);
@@ -144,10 +163,12 @@ function colisionWithBoat(ballIndex) {
   for (var i = 0; i < boats.length; i++) {
     if (balls[ballIndex] !== undefined && boats[i] !== undefined) {
       var collision = Matter.SAT.collides(balls[ballIndex].body, boats[i].body);
-      if (collision.collided) {
-        boats[i].remove(i);
-        World.remove(world, balls[ballIndex].body);
-        delete balls[ballIndex];
+      if (!boats[i].isBroken) {
+        if (collision.collided) {
+          boats[i].remove(i);
+          World.remove(world, balls[ballIndex].body);
+          delete balls[ballIndex];
+        }
       }
     }
   }
