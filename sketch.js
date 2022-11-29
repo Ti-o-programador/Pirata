@@ -17,6 +17,7 @@ var brokenBoatJson, brokenBoatImg, brokenBoatAnimation = [];
 var splashJson, splashImg, splashAnimation = [];
 var angle = 15;
 var balls = [];
+var pirateSound, explosionSound, splashSound;
 
 function preload() {
   backgroundImg = loadImage("./assets/background.gif");
@@ -30,6 +31,11 @@ function preload() {
   brokenBoatImg = loadImage("./assets/boat/brokenBoat.png");
   splashJson = loadJSON("./assets/waterSplash/waterSplash.json");
   splashImg = loadImage("./assets/waterSplash/waterSplash.png");
+
+  pirateSound = loadSound("./assets/assets_pirate_laugh.mp3");
+  explosionSound = loadSound("./assets/assets_cannon_explosion.mp3");
+  splashSound = loadSound("./assets/assets_cannon_water.mp3");
+
 }
 
 function setup() {
@@ -107,6 +113,7 @@ function draw() {
 function keyReleased() {
   if (keyCode === DOWN_ARROW) {
     balls[balls.length - 1].shoot();
+    explosionSound.play();
   }
 }
 
@@ -149,6 +156,7 @@ function showBoats() {
         });
         boats[i].show();
         boats[i].animate();
+        var collision = Matter.SAT.collides(boats[i].body, tower);
       }
 
     }
